@@ -1,7 +1,12 @@
 <script lang="ts">
+	import { redirect } from '@sveltejs/kit';
+	
 	export let data
 	const redir = data.url
-	window.location.href = redir
 </script>
 
-<p>Redirecting to {redir}, click <a href="{redir}">here</a> if you are not being redirecting.</p>
+<svelte:head>
+	<meta http-equiv="refresh" content="3; url={redir}" />
+</svelte:head>
+
+<p>Redirecting to {redir} in 3 seconds, click <a href="{redir}">here</a> if you are not being redirecting.</p>
