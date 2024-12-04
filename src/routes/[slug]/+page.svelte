@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { redirect } from '@sveltejs/kit';
-	
 	export let data
 	const redir = data.url
 </script>
