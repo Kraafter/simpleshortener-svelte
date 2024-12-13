@@ -1,9 +1,10 @@
 import { json } from '@sveltejs/kit';
 import { Redis } from '@upstash/redis';
+import { env } from "$env/dynamic/private"
 
 const redis = new Redis({
-    url: import.meta.env.VITE_URL,
-    token: import.meta.env.VITE_STORE,
+    url: env.SECRET_KV_URL,
+    token: env.SECRET_KV_TOKEN,
 })
 
 export async function GET() {

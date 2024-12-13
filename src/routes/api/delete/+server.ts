@@ -4,8 +4,8 @@ import { env } from "$env/dynamic/private"
 import { compare } from 'bcrypt';
 
 const redis = new Redis({
-    url: import.meta.env.VITE_URL,
-    token: import.meta.env.VITE_STORE,
+    url: env.SECRET_KV_URL,
+    token: env.SECRET_KV_TOKEN,
 })
 
 var errormessage:string
