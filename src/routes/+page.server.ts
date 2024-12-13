@@ -1,14 +1,39 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import { hash } from 'bcrypt'
 
+function parseQueryString(queryString: string): Record<string, string> {
+
+  const result: Record<string, string> = {};
+  const pairs = queryString.split('&');
+  for (const pair of pairs) {
+
+      const [key, value] = pair.split('=');
+      if (key && value) {
+
+          result[decodeURIComponent(key)] = decodeURIComponent(value);
+      }
+  }
+  return result;
+
+}
 
 export const actions = {
     submitAdd: async ({ request, fetch }) => {
       console.log("Sending request for new slug url pair")
       const formData = await request.formData();
-      const accessa = formData.get('accessa');
-      const sluga = formData.get('sluga');
-      const urla = formData.get('urla');
+
+      const searchParams = new URLSearchParams(
+        formData as unknown as Record<string, string>,
+      ).toString()
+
+      const formDict = parseQueryString(searchParams)
+
+      const plainaccessa:string = formDict['accessa']
+      const sluga:string = formDict['sluga']
+      const urla:string = formDict['urla']
+
+      const accessa = await hash(plainaccessa, 1)
       
       console.log('Adding')
       const response = await fetch('/api/add', {
@@ -30,8 +55,18 @@ export const actions = {
     submitDel: async ({ request, fetch }) => {
         console.log('Sending request to delete slug url pair')
         const formData = await request.formData();
-        const accessd = formData.get('accessd');
-        const slugd = formData.get('slugd');
+
+        const searchParams = new URLSearchParams(
+          formData as unknown as Record<string, string>,
+        ).toString()
+
+        const formDict = parseQueryString(searchParams)
+
+        const plainaccessd = formDict['accessd'];
+        console.log(plainaccessd)
+        const slugd = formDict['slugd'];
+
+        const accessd = await hash(plainaccessd, 1)
 
         console.log('Deleting')
         const response = await fetch('/api/delete', {

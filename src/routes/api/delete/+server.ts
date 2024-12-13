@@ -1,5 +1,7 @@
 import { error, json } from '@sveltejs/kit';
 import { Redis } from "@upstash/redis";
+import { env } from "$env/dynamic/private"
+import { compare } from 'bcrypt';
 
 const redis = new Redis({
     url: import.meta.env.VITE_URL,
@@ -12,13 +14,15 @@ export async function POST( {request} ) {
     console.log("request received, processing")
     const { accessd, slugd } = await request.json()
 
-    if (accessd != import.meta.env.VITE_ACCESS) {
+    const match = await compare(env.SECRET_APP_ACCESS, accessd)
+
+    if (!match) {
         errormessage = "Access key is invalid"
         throw error
-    } else if (!slugd && accessd == import.meta.env.VITE_ACCESS) {
+    } else if (!slugd && match) {
         errormessage = "No url to add to database"
         throw error
-    } else if (slugd && accessd == import.meta.env.VITE_ACCESS) {
+    } else if (slugd && match) {
         console.log("upload")
         await redis.del(slugd)
     }
