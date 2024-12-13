@@ -1,12 +1,6 @@
-import { urls } from '$lib/urls-list.js'
-var url:string
-
 export async function load({ params }) {
-	urls.subscribe((value) => {
-		const slug = params.slug
-		url = value.get(slug)
-	})
+	var slug:string = params.slug
 	return {
-		url
+		slug
 	}
 }
