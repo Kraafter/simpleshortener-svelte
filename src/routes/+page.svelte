@@ -1,52 +1,62 @@
 <script lang="ts">
-    import { enhance } from '$app/forms';
-    import { syncMapWithLocalStorage } from '$lib/localstorehandle.js';
-    import { urls } from '$lib/urls-list';
-	import { onMount } from 'svelte';
+    import { onMount } from 'svelte'
+
+    let entries = {}
 
     onMount(() => {
-        syncMapWithLocalStorage(urls, 'urls');
-    });
 
-    console.log($urls)
-    let entries = Object.entries($urls)
-    console.log(entries)
+        async function getList() {
+            try {
+                const response = await fetch('/api/list')
+                if (!response.ok) {
+                    throw new Error('Network response was not ok')
+                }
+                entries = await response.json()
+            } catch (error) {
+                console.error('Fetch error:', error)
+            }
+        }
+
+        getList();
+
+    });
 </script>
 
 <h1>Extremely basic SvelteKit link shortener</h1>
 <h2>Currently shortened links (Slug, Url)</h2>
 <ul>
-    {#each entries as [key, value]}
+    {#each Object.entries(entries) as [key, value]}
         <li>{key} = {value}</li>
     {/each}
 </ul>
+
+
 <h2>Insert key and url</h2>
 <form
-    use:enhance
-    action="?/upload"
+    action="?/submitAdd"
     method="POST"
-    enctype="multipart/form-data"
 >
     <p>Accesskey</p>
-    <input type="password" name="accesskey" required /><br><br>
+    <input type="password" name="accessa" required /><br><br>
     <p>slug</p>
-    <input type="text" name="slug" required /><br><br>
+    <input type="text" name="sluga" required /><br><br>
     <p>url to shorten</p>
-    <input type="text" name="url" required /><br><br>
-    <button>Upload</button>
+    <input type="text" name="urla" required /><br><br>
+    <button formaction="?/submitAdd">Submit</button>
 </form>
 <br>
+
+
 <h2>Delete key and url</h2>
 <form
-    use:enhance
-    action="?/upload"
+    action="?/submitDel"
     method="POST"
-    enctype="multipart/form-data"
 >
     <p>Accesskey</p>
-    <input type="password" name="accesskey" required /><br><br>
+    <input type="password" name="accessd" required /><br><br>
     <p>slug to delete</p>
-    <input type="text" name="slug" required /><br><br>
-    <button>Upload</button>
+    <input type="text" name="slugd" required /><br><br>
+    <button formaction="?/submitDel">Submit</button>
 </form>
+
 <p>Brought to you by <a target="_blank" href="https://kraafter.me/">Kraafter</a></p>
