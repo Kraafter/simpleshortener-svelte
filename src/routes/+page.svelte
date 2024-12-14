@@ -1,10 +1,8 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-
     let entries = {}
 
     onMount(() => {
-
         async function getList() {
             try {
                 const response = await fetch('/api/list')
@@ -58,7 +56,6 @@
     <input type="text" name="slugd" required /><br><br>
     <button formaction="?/submitDel">Submit</button>
 </form>
-
 <br>
-<p>Simple Svelte Link Shortener, view source on <a href="https://github.com/Kraafter/simpleshortener-svelte" target="_blank">Github</a></p><br>
+<p>Simple Svelte Link Shortener, view source on <a href="https://github.com/Kraafter/simpleshortener-svelte" target="_blank">Github</a></p>
 <p>Brought to you by <a target="_blank" href="https://kraafter.me/">Kraafter</a></p>

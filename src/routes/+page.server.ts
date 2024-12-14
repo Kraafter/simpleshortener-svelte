@@ -1,17 +1,17 @@
-import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import { fail, redirect } from '@sveltejs/kit'
+import type { Actions } from './$types'
 import { hash } from 'bcrypt'
 
 function parseQueryString(queryString: string): Record<string, string> {
 
-  const result: Record<string, string> = {};
-  const pairs = queryString.split('&');
+  const result: Record<string, string> = {}
+  const pairs = queryString.split('&')
   for (const pair of pairs) {
 
-      const [key, value] = pair.split('=');
+      const [key, value] = pair.split('=')
       if (key && value) {
 
-          result[decodeURIComponent(key)] = decodeURIComponent(value);
+          result[decodeURIComponent(key)] = decodeURIComponent(value)
       }
   }
   return result;
@@ -19,6 +19,7 @@ function parseQueryString(queryString: string): Record<string, string> {
 }
 
 export const actions = {
+  
     submitAdd: async ({ request, fetch }) => {
       console.log("Sending request for new slug url pair")
       const formData = await request.formData();
