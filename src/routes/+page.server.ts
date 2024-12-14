@@ -65,7 +65,7 @@ export const actions = {
 
     submitDel: async ({ request, fetch }) => {
         console.log('Sending request to delete slug url pair')
-        const formData = await request.formData();
+        const formData = await request.formData()
 
         const searchParams = new URLSearchParams(
           formData as unknown as Record<string, string>,
@@ -73,9 +73,9 @@ export const actions = {
 
         const formDict = parseQueryString(searchParams)
 
-        const plainaccessd = formDict['accessd'];
+        const plainaccessd = formDict['accessd']
         console.log(plainaccessd)
-        const slugd = formDict['slugd'];
+        const slugd = formDict['slugd']
 
         const accessd = await hash(plainaccessd, 1)
 
