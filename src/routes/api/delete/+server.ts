@@ -17,11 +17,9 @@ export async function POST( {request} ) {
     const match = await compare(env.SECRET_APP_ACCESS, accessd)
 
     if (!match) {
-        errormessage = "Access key is invalid"
-        throw error
+        errormessage = "accessDenied"
     } else if (!slugd && match) {
-        errormessage = "No url to add to database"
-        throw error
+        errormessage = "noSlug"
     } else if (slugd && match) {
         console.log("upload")
         await redis.del(slugd)

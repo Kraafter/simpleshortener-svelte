@@ -46,10 +46,20 @@ export const actions = {
       });
 
       if (response.ok) {
-        return redirect(303, '/'); // Redirect on success
+        const apiStatus:string = (await response.json())['status']
+        console.log(apiStatus)
+        if(apiStatus === 'OK') {
+          return redirect(303, '/');
+        } else if(apiStatus === 'accessDenied') {
+          return redirect(303, '/alert/accessdenied')
+        } else if(apiStatus === 'noUrl') {
+          return redirect(303, '/alert/urlempty')
+        } else if(apiStatus === 'invalidUrl') {
+          return redirect(303, '/alert/noturl')
+        }
       }
 
-      return fail(500, { error: 'Server error' });
+      return redirect(303, '/alert/err')
       
     },
 
@@ -79,10 +89,18 @@ export const actions = {
         });
 
         if (response.ok) {
-          return redirect(303, '/'); // Redirect on success
+          const apiStatus:string = (await response.json())['status']
+          console.log(apiStatus)
+          if(apiStatus === 'OK') {
+            return redirect(303, '/');
+          } else if(apiStatus === 'accessDenied') {
+            return redirect(303, '/alert/accessdenied')
+          } else if(apiStatus === 'noSlug') {
+            return redirect(303, '/alert/slugempty')
+          }
         }
   
-        return fail(500, { error: 'Server error' });
+        return redirect(303, '/alert/err')
 
       },
   } satisfies Actions
