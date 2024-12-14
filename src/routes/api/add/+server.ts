@@ -21,8 +21,12 @@ export async function POST( {request} ) {
     } else if ((!urla || !sluga) && match) {
         errormessage = "noUrl"
     } else if (urla && sluga && match) {
-        console.log("upload")
-        await redis.set(sluga, urla)
+        if(URL.canParse(urla)) {
+            console.log("upload")
+            await redis.set(sluga, urla)
+        } else {
+            errormessage = "invalidUrl"
+        }
     }
 
     if(!errormessage) {
