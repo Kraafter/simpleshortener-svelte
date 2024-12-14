@@ -1,4 +1,19 @@
+<!--
+READ ME
+
+For styling, you can put css within the <style> block below. It's not adviced
+to edit form action, method, type, and name as well as code inside {} as it could
+break adding, deleting, and listing links.
+
+Other pages you could style are listed in /alert. The contents can be modified freely
+but it's adviced that the main point per page is retained.
+-->
+
+
 <script lang="ts">
+
+// Shortened Links (code)
+
     import { onMount } from 'svelte'
     let entries = {}
 
@@ -18,9 +33,18 @@
         getList();
 
     });
+
+// this is the code to show all shortened
+// links, you can comment (ctrl + /) the
+// entire part to disable it.
+
 </script>
 
 <h1>Extremely basic SvelteKit link shortener</h1>
+
+
+<!-- Shortened links -->
+
 <h2>Currently shortened links (Slug, Url)</h2>
 <ul>
     {#each Object.entries(entries) as [key, value]}
@@ -28,8 +52,14 @@
     {/each}
 </ul>
 
+<!--
+this is used to show all shortened links
+you can comment (ctrl + /) the entire part
+to disable it.
+-->
 
-<h2>Insert key and url</h2>
+
+<h2>Insert key and url</h2> <!-- Form to add link to database -->
 <form
     action="?/submitAdd"
     method="POST"
@@ -45,7 +75,7 @@
 <br>
 
 
-<h2>Delete key and url</h2>
+<h2>Delete key and url</h2> <!-- Form to remove link from database -->
 <form
     action="?/submitDel"
     method="POST"
@@ -59,3 +89,11 @@
 <br>
 <p>Simple Svelte Link Shortener, view source on <a href="https://github.com/Kraafter/simpleshortener-svelte" target="_blank">Github</a></p>
 <p>Brought to you by <a target="_blank" href="https://kraafter.me/">Kraafter</a></p>
+
+
+<!-- For styling, treat this like conventional css -->
+<style>
+    p {
+        font-size: initial;
+    }
+</style>
