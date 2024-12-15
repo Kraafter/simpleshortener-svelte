@@ -18,6 +18,7 @@ modified freely but it's adviced that the main point per page is retained.
 // Shortened Links (code)
 
     import { onMount } from 'svelte'
+    import { PUBLIC_SITE_URL } from '$env/static/public'
     let entries = {}
 
     onMount(() => {
@@ -53,7 +54,7 @@ modified freely but it's adviced that the main point per page is retained.
     <h2>Currently shortened links (Slug, Url)</h2>
     <ul>
         {#each Object.entries(entries) as [key, value]}
-            <li>{key} = {value}</li>
+            <li><a href="https://{PUBLIC_SITE_URL}/{key}">{key}</a> = {value}</li>
         {/each}
     </ul>
 
