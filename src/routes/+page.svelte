@@ -3,10 +3,13 @@ READ ME
 
 For styling, you can put css within the <style> block below. It's not adviced
 to edit form action, method, type, and name as well as code inside {} as it could
-break adding, deleting, and listing links.
+break adding, deleting, and listing links. Unless ofcourse, you understand what
+the code does and you know what you are doing.
 
-Other pages you could style are listed in /alert. The contents can be modified freely
-but it's adviced that the main point per page is retained.
+It's also unadviced to edit code under /src/routes/api for the same reason.
+
+Other pages you could style are listed in src/routes/alert. The contents can be
+modified freely but it's adviced that the main point per page is retained.
 -->
 
 
