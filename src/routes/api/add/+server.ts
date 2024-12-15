@@ -10,8 +10,16 @@ const redis = new Redis({
 
 var errormessage:string
 
+function safeSlug(input:string) {
+    let slug = input.toLowerCase()
+    slug = slug.replace(/\s+/g, '-') // spaces to hyphens
+    slug = slug.replace(/[^a-z0-9-]/g, '') // remove invalid characters
+    slug = slug.replace(/-+/g, '-') // no hyphen duplicates
+    slug = slug.replace(/^-+|-+$/g, '') // trim leading trailing hyphens
+    return slug
+  }
+
 export async function POST( {request} ) {
-    console.log("request received, processing")
     const { accessa, sluga, urla } = await request.json()
 
     const match = await compare(env.SECRET_APP_ACCESS, accessa)
@@ -22,8 +30,7 @@ export async function POST( {request} ) {
         errormessage = "noUrl"
     } else if (urla && sluga && match) {
         if(URL.canParse(urla)) {
-            console.log("upload")
-            await redis.set(sluga, urla)
+            await redis.set(safeSlug(sluga), urla)
         } else {
             errormessage = "invalidUrl"
         }
