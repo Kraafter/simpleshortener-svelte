@@ -69,12 +69,12 @@ modified freely but it's adviced that the main point per page is retained.
         action="?/submitAdd"
         method="POST"
     >
-        <p>Accesskey</p>
-        <input type="password" name="accessa" required /><br><br>
+        <p>Access key</p>
+        <input type="password" name="accessa" placeholder="case sensitive" required /><br><br>
         <p>slug</p>
-        <input type="text" name="sluga" required /><br><br>
+        <input type="text" name="sluga" placeholder="(eg. invite, pet-album, nightmare-ep1)" required /><br><br>
         <p>url to shorten</p>
-        <input type="text" name="urla" required /><br><br>
+        <input type="text" name="urla" placeholder="(eg. https://www.youtube.com/watch?v=dQw4w9WgXcQ)" required/><br><br>
         <button formaction="?/submitAdd">Submit</button>
     </form>
     <br>
@@ -85,10 +85,10 @@ modified freely but it's adviced that the main point per page is retained.
         action="?/submitDel"
         method="POST"
     >
-        <p>Accesskey</p>
-        <input type="password" name="accessd" required /><br><br>
+        <p>Access key</p>
+        <input type="password" name="accessd" placeholder="case sensitive" required /><br><br>
         <p>slug to delete</p>
-        <input type="text" name="slugd" required /><br><br>
+        <input type="text" name="slugd" placeholder="refer to list" required /><br><br>
         <button formaction="?/submitDel">Submit</button>
     </form>
     <br>
