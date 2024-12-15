@@ -11,7 +11,6 @@ const redis = new Redis({
 var errormessage:string
 
 export async function POST( {request} ) {
-    console.log("request received, processing")
     const { accessd, slugd } = await request.json()
 
     const match = await compare(env.SECRET_APP_ACCESS, accessd)
@@ -21,7 +20,6 @@ export async function POST( {request} ) {
     } else if (!slugd && match) {
         errormessage = "noSlug"
     } else if (slugd && match) {
-        console.log("upload")
         await redis.del(slugd)
     }
 
