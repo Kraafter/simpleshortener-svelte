@@ -45,7 +45,7 @@ modified freely but it's adviced that the main point per page is retained.
 
 
 <main>
-    <h1>Extremely basic SvelteKit link shortener</h1>
+    <h1>Simple Svelte Link Shortener</h1>
 
 
     <!-- Shortened links -->
