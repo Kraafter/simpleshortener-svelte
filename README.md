@@ -11,6 +11,7 @@ A simple link shortener implementation designed to be self hosted or deployed to
    > - SECRET_APP_ACCESS => The access key you wish to use in order to add and delete links (treat this like a password).
    > - SECRET_KV_URL => Value from KV_REST_API_URL.
    > - SECRET_KV_TOKEN => Value from KV_REST_API_TOKEN.
+   > - PUBLIC_SITE_URL => The URL where the shortener will be at, without 'https://' or trailing slash (eg. simpleshortener-svelte.vercel.app)
 5. Under the Deployment section in the vercel projects page, click on the 3 dot menu on the latest deployment and click on Redeploy, this will apply the newly set env variables.
 6. You're done! You may customize the site's css to your liking but try not to touch any logics unless you know what you are doing.
 
@@ -32,5 +33,6 @@ Redis servers are available on most cloud platforms and can be [hosted by yourse
 
 You will also need to set up some env variables for API's and access
    > - SECRET_APP_ACCESS => The access key you wish to use in order to add and delete links (treat this like a password).
-   > - SECRET_KV_URL => the https url to the kv database
-   > - SECRET_KV_TOKEN => the read_write token to the kv datavase
+   > - SECRET_KV_URL => The https url to the kv database
+   > - SECRET_KV_TOKEN => The read_write token to the kv datavase
+   > - PUBLIC_SITE_URL => The URL where the shortener will be at, without 'https://' or trailing slash (eg. simpleshortener-svelte.vercel.app)
