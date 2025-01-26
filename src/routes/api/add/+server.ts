@@ -1,7 +1,7 @@
-import { json } from '@sveltejs/kit';
-import { Redis } from "@upstash/redis";
+import { json } from '@sveltejs/kit'
+import { Redis } from "@upstash/redis"
 import { env } from "$env/dynamic/private"
-import { compare } from 'bcrypt';
+import { compare } from 'bcrypt'
 
 const redis = new Redis({
     url: env.SECRET_KV_URL,

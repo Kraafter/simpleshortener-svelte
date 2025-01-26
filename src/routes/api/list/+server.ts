@@ -1,5 +1,5 @@
-import { json } from '@sveltejs/kit';
-import { Redis } from '@upstash/redis';
+import { json } from '@sveltejs/kit'
+import { Redis } from '@upstash/redis'
 import { env } from "$env/dynamic/private"
 
 const redis = new Redis({
