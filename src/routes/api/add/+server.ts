@@ -28,6 +28,8 @@ export async function POST( {request} ) {
         errormessage = "accessDenied"
     } else if ((!urla || !sluga) && match) {
         errormessage = "noUrl"
+    } else if (match && (sluga == 'api' || sluga == 'alert')){
+        errormessage = "reserved"
     } else if (urla && sluga && match) {
         if(URL.canParse(urla)) {
             await redis.set(safeSlug(sluga), urla)

@@ -56,6 +56,8 @@ export const actions = {
           return redirect(303, '/alert/urlempty')
         } else if(apiStatus === 'invalidUrl') {
           return redirect(303, '/alert/noturl')
+        } else if(apiStatus === 'reserved') {
+          return redirect(303, '/alert/reserved')
         }
       }
 
